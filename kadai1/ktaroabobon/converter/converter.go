@@ -1,4 +1,4 @@
-package ktaroabobon
+package converter
 
 import (
 	"flag"
@@ -16,7 +16,7 @@ func init() {
 	flag.StringVar(&d, "d", "img", "変換ファイルの存在するディレクトリ")
 }
 
-func extensionExchanger(path, save string) error {
+func Convert(path, save string) error {
 	j, err := os.Open(path)
 	if err != nil {
 		return err
@@ -45,7 +45,7 @@ func extensionExchanger(path, save string) error {
 	return nil
 }
 
-func kadai1() error {
+func Run() error {
 	flag.Parse()
 
 	err := filepath.Walk(d,
@@ -53,7 +53,7 @@ func kadai1() error {
 			if filepath.Ext(path) == ".jpg" {
 				save := d + filepath.Base(path) + ".png"
 				fmt.Println(path)
-				err := extensionExchanger(path, save)
+				err := Convert(path, save)
 				if err != nil {
 					return err
 				}
@@ -64,12 +64,4 @@ func kadai1() error {
 		return err
 	}
 	return nil
-}
-
-func main() {
-	err := kadai1()
-	if err != nil {
-		panic(err)
-	}
-
 }
