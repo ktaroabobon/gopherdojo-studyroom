@@ -1,7 +1,6 @@
 package converter
 
 import (
-	"flag"
 	"fmt"
 	"image/jpeg"
 	"image/png"
@@ -9,12 +8,6 @@ import (
 	"os"
 	"path/filepath"
 )
-
-var d string
-
-func init() {
-	flag.StringVar(&d, "d", "img", "変換ファイルの存在するディレクトリ")
-}
 
 func Convert(path, save string) error {
 	j, err := os.Open(path)
@@ -45,9 +38,7 @@ func Convert(path, save string) error {
 	return nil
 }
 
-func Run() error {
-	flag.Parse()
-
+func Run(d string) error {
 	err := filepath.Walk(d,
 		func(path string, info fs.FileInfo, err error) error {
 			if filepath.Ext(path) == ".jpg" {
