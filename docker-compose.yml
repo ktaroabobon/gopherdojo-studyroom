@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  kadai_1:
+    container_name: kadai-1
+    build:
+      context: .
+      dockerfile: ./kadai1/ktaroabobon/Dockerfile
+    volumes:
+      - ./:/code
+    ports:
+      - "3000:3000"
+    tty: true
